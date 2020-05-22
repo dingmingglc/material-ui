@@ -32,7 +32,8 @@ const TabPanel = React.forwardRef(function TabPanel(props, ref) {
       role="tabpanel"
       {...other}
     >
-      {value === context.value && children}
+      // {value === context.value && children}
+                                  {value ===value && children}
     </div>
   );
 });
