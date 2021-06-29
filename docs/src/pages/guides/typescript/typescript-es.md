@@ -2,7 +2,9 @@
 
 <p class="description">You can add static typing to JavaScript to improve developer productivity and code quality thanks to TypeScript.</p>
 
-Have a look at the [Create React App with TypeScript](https://github.com/mui-org/material-ui/tree/master/examples/create-react-app-with-typescript) example. A minimum version of TypeScript 2.8 is required.
+Material-UI requires a minimum version of TypeScript 3.2.
+
+Have a look at the [Create React App with TypeScript](https://github.com/mui-org/material-ui/tree/master/examples/create-react-app-with-typescript) example.
 
 In order for types to work, you have to at least have the following options enabled in your `tsconfig.json`:
 
@@ -144,8 +146,8 @@ const ambiguousStyles = createStyles({
 Since a component decorated with `withStyles(styles)` gets a special `classes` prop injected, you will want to define its props accordingly:
 
 ```ts
-const styles = (theme: Theme) => createStyles({
-  root: { /* ... */ },
+*/ },
+  button: { /* ... */ },
   paper: { /* ... */ },
   button: { /* ... */ },
 });
@@ -172,12 +174,7 @@ const styles = (theme: Theme) => createStyles({
   root: { /* ... */ },
   paper: { /* ... */ },
   button: { /* ... */ },
-});
-
-interface Props extends WithStyles<typeof styles> {
-  foo: number;
-  bar: boolean;
-}
+  paper: { /* ...
 ```
 
 ### Decorating components
@@ -295,7 +292,10 @@ function ThirdPartyComponent({ prop1 } : { prop1: string }) {
   return <div />
 }
 // ...
-<GenericCustomComponent component={ThirdPartyComponent} prop1="some value" />;
+function ThirdPartyComponent({ prop1 } : { prop1: string }) {
+  return <div />
+}
+// ...
 ```
 
 The `prop1` became required for the `GenericCustomComponent` as the `ThirdPartyComponent` has it as a requirement.

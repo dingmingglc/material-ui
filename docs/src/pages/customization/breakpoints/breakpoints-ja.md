@@ -59,7 +59,7 @@ const styles = theme => ({
 
 ## JavaScriptメディアクエリ
 
-CSSだけでは不十分な場合もあります。 JavaScriptで、ブレークポイントの値に基づいてReactレンダリングツリーを変更できます。
+CSSだけでは不十分な場合もあります。 CSSだけでは不十分な場合もあります。 CSSだけでは不十分な場合もあります。 JavaScriptで、ブレークポイントの値に基づいてReactレンダリングツリーを変更できます。
 
 ### useMediaQueryフック
 
@@ -109,7 +109,7 @@ const theme = createMuiTheme({
 
 Feel free to have as few or as many breakpoints as you want, naming them in whatever way you'd prefer for your project.
 
-```tsx
+```js
 const theme = createMuiTheme({
   breakpoints: {
     values: {
@@ -119,11 +119,13 @@ const theme = createMuiTheme({
     },
   },
 });
+```
 
-declare module "@material-ui/core/styles/createBreakpoints"
-{
-  interface BreakpointOverrides
-  {
+If you are using TypeScript, you would also need to use [module augmentation](/guides/typescript/#customization-of-theme) for the theme to accept the above values.
+
+```ts
+declare module "@material-ui/core/styles/createBreakpoints" {
+  interface BreakpointOverrides {
     xs: false; // removes the `xs` breakpoint
     sm: false;
     md: false;
@@ -142,7 +144,7 @@ declare module "@material-ui/core/styles/createBreakpoints"
 
 #### 引数
 
-1. `key` (*String* | *Number*)：ブレークポイントキー（` xs ` 、` sm `など）またはピクセル単位の画面幅の数値。
+1. `key` (*String* | *Number*)：ブレークポイントキー（`xs` 、`sm`など）またはピクセル単位の画面幅の数値。
 
 #### 戻り値
 
@@ -167,7 +169,7 @@ const styles = theme => ({
 
 #### 引数
 
-1. `key` (*String* | *Number*)：ブレークポイントキー（` xs ` 、` sm `など）またはピクセル単位の画面幅の数値。
+1. `key` (*String* | *Number*)：ブレークポイントキー（`xs` 、`sm`など）またはピクセル単位の画面幅の数値。
 
 #### 戻り値
 
@@ -193,7 +195,7 @@ const styles = theme => ({
 
 #### 引数
 
-1. `key` (*String*)：ブレークポイントキー（` xs ` 、` sm `など）。
+1. `key` (*String*)：ブレークポイントキー（`xs` 、`sm`など）。
 
 #### 戻り値
 
@@ -252,7 +254,7 @@ type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 注意が必要な実装の詳細は、次のとおりです。
 
-- *non React static* プロパティを転送するので、このHOCはより「透明」です。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。
+- *non React static* プロパティを転送するので、このHOCはより「透明」です。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。 たとえば、`getInitialProps()`静的メソッド (next.js) を定義するために使用できます。
 
 #### 引数
 
@@ -278,7 +280,7 @@ const theme = createMuiTheme({
 
 #### 戻り値
 
-`higher-order component` ：コンポーネントをラップするために使用する必要があります。
+注意が必要な実装の詳細は、次のとおりです。
 
 #### 例
 

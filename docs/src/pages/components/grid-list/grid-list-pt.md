@@ -1,6 +1,6 @@
 ---
 title: Componente React para Lista de Grade
-components: GridList, GridListTile, GridListTileBar, ListSubheader, IconButton
+components: GridList, GridListTile, GridListTileBar
 ---
 
 # Lista de Grade
@@ -21,7 +21,7 @@ Este exemplo demonstra o uso do `GridListTileBar` para adicionar uma sobreposiç
 
 {{"demo": "pages/components/grid-list/TitlebarGridList.js", "hideEditButton": true}}
 
-## Lista de grade de linha única
+## Lista de grade em linha única
 
 Este exemplo demonstra uma lista de grade com imagens, em linha unica e rolável horizontalmente. As listas de grade de rolagem horizontal não são recomendadas porque a rolagem interfere nos padrões de leitura típicos, afetando a compreensão. Uma exceção notável para rolagem horizontal, seria uma lista de grade com imagens em linha única, como uma galeria.
 

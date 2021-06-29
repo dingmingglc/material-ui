@@ -27,6 +27,7 @@ const styles = (theme) => ({
     },
     // inline code
     '& code': {
+      direction: 'ltr',
       lineHeight: 1.4,
       display: 'inline-block',
       fontFamily: 'Consolas, "Liberation Mono", Menlo, Courier, monospace',
@@ -125,6 +126,9 @@ const styles = (theme) => ({
       },
       '& .required': {
         color: theme.palette.type === 'light' ? '#006500' : '#a5ffa5',
+      },
+      '& .optional': {
+        color: theme.palette.type === 'light' ? '#080065' : '#a5b3ff',
       },
       '& .prop-type': {
         fontFamily: 'Consolas, "Liberation Mono", Menlo, monospace',

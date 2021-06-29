@@ -19,12 +19,12 @@ describe('<TablePagination />', () => {
 
   before(() => {
     classes = getClasses(
-      <TablePagination count={1} onChangePage={() => {}} page={0} rowsPerPage={10} />,
+      <TablePagination count={1} onChangePage={noop} page={0} rowsPerPage={10} />,
     );
   });
 
   describeConformance(
-    <TablePagination count={1} onChangePage={() => {}} page={0} rowsPerPage={10} />,
+    <TablePagination count={1} onChangePage={noop} page={0} rowsPerPage={10} />,
     () => ({
       classes,
       inheritComponent: TableCell,
@@ -45,7 +45,7 @@ describe('<TablePagination />', () => {
     }),
   );
 
-  describe('render', () => {
+  describe('prop: labelDisplayedRows', () => {
     it('should use the labelDisplayedRows callback', () => {
       let labelDisplayedRowsCalled = false;
       function labelDisplayedRows({ from, to, count, page }) {
@@ -76,9 +76,11 @@ describe('<TablePagination />', () => {
       expect(labelDisplayedRowsCalled).to.equal(true);
       expect(container.innerHTML.includes('Page 1')).to.equal(true);
     });
+  });
 
-    it('should use labelRowsPerPage', () => {
-      const { container } = render(
+  describe('prop: labelRowsPerPage', () => {
+    it('labels the select for the current page', () => {
+      const { getAllByRole } = render(
         <table>
           <TableFooter>
             <TableRow>
@@ -88,17 +90,49 @@ describe('<TablePagination />', () => {
                 onChangePage={noop}
                 onChangeRowsPerPage={noop}
                 rowsPerPage={10}
-                labelRowsPerPage="Zeilen pro Seite:"
+                labelRowsPerPage="lines per page:"
               />
             </TableRow>
           </TableFooter>
         </table>,
       );
-      expect(container.innerHTML.includes('Zeilen pro Seite:')).to.equal(true);
+
+      // will be `getByRole('combobox')` in aria 1.2
+      const [combobox] = getAllByRole('button');
+      expect(combobox).toHaveAccessibleName('lines per page: 10');
     });
 
+    it('accepts React nodes', () => {
+      const { getAllByRole } = render(
+        <table>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                count={1}
+                page={0}
+                onChangePage={noop}
+                onChangeRowsPerPage={noop}
+                rowsPerPage={10}
+                labelRowsPerPage={
+                  <React.Fragment>
+                    <em>lines</em> per page:
+                  </React.Fragment>
+                }
+              />
+            </TableRow>
+          </TableFooter>
+        </table>,
+      );
+
+      // will be `getByRole('combobox')` in aria 1.2
+      const [combobox] = getAllByRole('button');
+      expect(combobox).toHaveAccessibleName('lines per page: 10');
+    });
+  });
+
+  describe('prop: page', () => {
     it('should disable the back button on the first page', () => {
-      const { getByRole } = render(
+      const { getAllByRole } = render(
         <table>
           <TableFooter>
             <TableRow>
@@ -113,14 +147,14 @@ describe('<TablePagination />', () => {
           </TableFooter>
         </table>,
       );
-      const backButton = getByRole('button', { name: 'Previous page' });
-      const nextButton = getByRole('button', { name: 'Next page' });
+
+      const [, backButton, nextButton] = getAllByRole('button');
       expect(backButton).to.have.property('disabled', true);
       expect(nextButton).to.have.property('disabled', false);
     });
 
     it('should disable the next button on the last page', () => {
-      const { getByRole } = render(
+      const { getAllByRole } = render(
         <table>
           <TableFooter>
             <TableRow>
@@ -136,12 +170,13 @@ describe('<TablePagination />', () => {
         </table>,
       );
 
-      const backButton = getByRole('button', { name: 'Previous page' });
-      const nextButton = getByRole('button', { name: 'Next page' });
+      const [, backButton, nextButton] = getAllByRole('button');
       expect(backButton).to.have.property('disabled', false);
       expect(nextButton).to.have.property('disabled', true);
     });
+  });
 
+  describe('prop: onChangePage', () => {
     it('should handle next button clicks properly', () => {
       let page = 1;
       const { getByRole } = render(
@@ -191,7 +226,9 @@ describe('<TablePagination />', () => {
       fireEvent.click(backButton);
       expect(page).to.equal(0);
     });
+  });
 
+  describe('label', () => {
     it('should display 0 as start number if the table is empty ', () => {
       const { container } = render(
         <table>

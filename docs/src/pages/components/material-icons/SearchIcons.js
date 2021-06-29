@@ -107,6 +107,9 @@ let Icons = (props) => {
               onClick={handleClickOpen}
               title={icon.key}
               className={classes.iconSvg}
+              data-ga-event-category="material-icons"
+              data-ga-event-action="click"
+              data-ga-event-label={icon.key}
             />
             {/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events */}
             <p onClick={handleClick}>{icon.key}</p>
@@ -286,6 +289,9 @@ DialogDetails.propTypes = {
 DialogDetails = React.memo(DialogDetails);
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    minHeight: 500,
+  },
   form: {
     margin: theme.spacing(2, 0),
   },
@@ -421,8 +427,8 @@ export default function SearchIcons() {
               window.ga('send', {
                 hitType: 'event',
                 eventCategory: 'material-icons',
-                eventAction: value,
-                eventLabel: 'no results',
+                eventAction: 'no-results',
+                eventLabel: value,
               });
             }
           });
@@ -440,7 +446,7 @@ export default function SearchIcons() {
   );
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <Grid item xs={12} sm={3}>
         <form className={classes.form}>
           <RadioGroup>

@@ -109,7 +109,7 @@ const theme = createMuiTheme({
 
 Feel free to have as few or as many breakpoints as you want, naming them in whatever way you'd prefer for your project.
 
-```tsx
+```js
 const theme = createMuiTheme({
   breakpoints: {
     values: {
@@ -119,11 +119,13 @@ const theme = createMuiTheme({
     },
   },
 });
+```
 
-declare module "@material-ui/core/styles/createBreakpoints"
-{
-  interface BreakpointOverrides
-  {
+If you are using TypeScript, you would also need to use [module augmentation](/guides/typescript/#customization-of-theme) for the theme to accept the above values.
+
+```ts
+declare module "@material-ui/core/styles/createBreakpoints" {
+  interface BreakpointOverrides {
     xs: false; // removes the `xs` breakpoint
     sm: false;
     md: false;
@@ -257,9 +259,9 @@ Einige Implementierungsdetails, die interessant sein könnten:
 #### Argumente
 
 1. `options` (*Object* [optional]): 
-  - `options.withTheme ` (*Boolean* [optional]): Standardeinstellung ist `false`. Übergeben Sie das `Theme` Objekt als Eigenschaft an die Komponente.
-  - `options.noSSR ` (*Boolean* [optional]): Standardeinstellung ist `false`. Um den serverseitigen Renderingabgleich durchzuführen, muss er zweimal gerendert werden. Ein erstes Mal mit nichts und ein zweites Mal mit den Kind-Elementen. Dieser Zyklus mit zwei Durchgängen ist mit einem Nachteil verbunden. Die Benutzeroberfläche blinkt möglicherweise. Sie können dieses Flag auf ` true` setzen, wenn Sie kein serverseitiges Rendering durchführen.
-  - ` options.initialWidth ` (*Breakpoint* [optional]): Da ` window.innerWidth ` auf dem Server nicht verfügbar ist, wird eine leere Komponente während der ersten Mounts standardmäßig gerendert. Vielleicht mögen Sie eine Heuristik verwenden, um annähernd die Bildschirmbreite des Client-Browsers zu bestimmen. Sie könnten beispielsweise den Benutzeragenten oder die Client-Hinweise verwenden. Mit https://caniuse.com/#search=client%20hint, können wir die anfängliche Breite global festlegen, indem Sie die [`benutzerdefinierten Eigenschaften`](/customization/globals/#default-props) zum Theme verwenden. Um die Anfangsbreite festzulegen, müssen wir eine benutzerdefinierte Eigenschaft mit dieser Form übergeben:
+  - `options.withTheme` (*Boolean* [optional]): Standardeinstellung ist `false`. Übergeben Sie das `Theme` Objekt als Eigenschaft an die Komponente.
+  - `options.noSSR` (*Boolean* [optional]): Standardeinstellung ist `false`. Um den serverseitigen Renderingabgleich durchzuführen, muss er zweimal gerendert werden. Ein erstes Mal mit nichts und ein zweites Mal mit den Kind-Elementen. Dieser Zyklus mit zwei Durchgängen ist mit einem Nachteil verbunden. Die Benutzeroberfläche blinkt möglicherweise. Sie können dieses Flag auf `true` setzen, wenn Sie kein serverseitiges Rendering durchführen.
+  - `options.initialWidth` (*Breakpoint* [optional]): Da `window.innerWidth` auf dem Server nicht verfügbar ist, wird eine leere Komponente während der ersten Mounts standardmäßig gerendert. Vielleicht mögen Sie eine Heuristik verwenden, um annähernd die Bildschirmbreite des Client-Browsers zu bestimmen. Sie könnten beispielsweise den Benutzeragenten oder die Client-Hinweise verwenden. Mit https://caniuse.com/#search=client%20hint, können wir die anfängliche Breite global festlegen, indem Sie die [`benutzerdefinierten Eigenschaften`](/customization/globals/#default-props) zum Theme verwenden. Um die Anfangsbreite festzulegen, müssen wir eine benutzerdefinierte Eigenschaft mit dieser Form übergeben:
 
 ```js
 const theme = createMuiTheme({
